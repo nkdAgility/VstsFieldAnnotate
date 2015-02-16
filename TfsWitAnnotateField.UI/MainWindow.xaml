@@ -46,15 +46,15 @@
     </Window.DataContext>
     <Grid>
         <DockPanel>
-            <DockPanel.Background>
+             <DockPanel.Background>
                 <ImageBrush ImageSource="Assets/header-background.png"/>
             </DockPanel.Background>
             <DockPanel DockPanel.Dock="Top" Margin="5">
-                <Image Width="90" Source="Assets/metro-logo-128-link.png" />
+                <Image VerticalAlignment="Top" Width="90" Source="Assets/metro-logo-128-link.png" />
                 <DockPanel Margin="5,0">
-                    <TextBlock DockPanel.Dock="Top" Text="Tfs Field Annotator" TextWrapping="Wrap" Foreground="White" FontSize="32" Margin="0" />
+                    <TextBlock DockPanel.Dock="Top" Text="naked ALM: Field Anotate" TextWrapping="Wrap" Foreground="White" FontSize="32" Margin="0" />
                     <TextBlock  Foreground="White" TextWrapping="Wrap" Margin="0,5" >
-                       Guidance for agile teams developing software with Team Foundation Server and Visual Studio. Provided to you from <Hyperlink NavigateUri="http://blog.hinshelwood.com/?utm_source=TfsFieldAnnotator&amp;utm_medium=banner&amp;utm_campaign=TfsFieldAnnotator" RequestNavigate="Hyperlink_RequestNavigate" Foreground="#FF0F6BB6">http://blog.hinshelwood.com</Hyperlink></TextBlock>
+                       Guidance for agile teams developing software with Team Foundation Server and Visual Studio. Provided to you from <Hyperlink NavigateUri="http://nakedalm.com/?utm_source=TfsServiceCredentials&amp;utm_medium=banner&amp;utm_campaign=TfsServiceCredentials" RequestNavigate="Hyperlink_RequestNavigate" Foreground="#FF0F6BB6">http://nakedalm.com</Hyperlink></TextBlock>
                 </DockPanel>
             </DockPanel>
             <ScrollViewer>
