@@ -38,8 +38,8 @@ namespace TfsWitAnnotateField.UI.ViewModel
                 {
                     return;
                 }
-
-                RaisePropertyChanging(IsCheckedPropertyName);
+           
+                //RaisePropertyChanging(IsCheckedPropertyName);
                 _isChecked = value;
                 RaisePropertyChanged(IsCheckedPropertyName);
                 Messenger.Default.Send<FieldDefinitionViewModel>(this);
@@ -71,7 +71,7 @@ namespace TfsWitAnnotateField.UI.ViewModel
                     return;
                 }
 
-                RaisePropertyChanging(NamePropertyName);
+                //RaisePropertyChanging(NamePropertyName);
                 _name = value;
                 RaisePropertyChanged(NamePropertyName);
             }

@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.22512.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TfsWitAnnotateField.UI", "TfsWitAnnotateField.UI\TfsWitAnnotateField.UI.csproj", "{3891CCBE-E6AD-4ED7-BE9D-5BCE3D287D6B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TfsWitAnnotateField.UI.Tests", "TfsWitAnnotateField.UI.Tests\TfsWitAnnotateField.UI.Tests.csproj", "{B03E741F-C483-4641-900C-F450E8CE961B}"
