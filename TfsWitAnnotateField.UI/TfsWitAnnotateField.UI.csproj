@@ -21,7 +21,7 @@
     <SccProvider>SAK</SccProvider>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <TargetFrameworkProfile />
-    <PublishUrl>ftp://downloads.hinshelwood.com/downloads/TfsWitAnnotateField/</PublishUrl>
+    <PublishUrl>C:\Users\mrhinsh\OneDrive\nkdalm-azure-store\clickonce\TfsWitAnnotateField\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -31,14 +31,14 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://downloads.hinshelwood.com/TfsWitAnnotateField/</InstallUrl>
+    <InstallUrl>https://nkdalm.blob.core.windows.net/clickonce/TfsWitAnnotateField/</InstallUrl>
     <SupportUrl>http://blog.hinshelwood.com</SupportUrl>
     <ProductName>TFS Field Annotate</ProductName>
     <PublisherName>Hinshelwood.com</PublisherName>
     <SuiteName>TFS Preview</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>TfsWitAnnotateField.htm</WebPage>
-    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationRevision>7</ApplicationRevision>
     <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
