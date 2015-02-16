@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using TfsWitAnnotateField.UI.Infra;
 
 namespace TfsWitAnnotateField.UI
 {
@@ -13,5 +14,6 @@ namespace TfsWitAnnotateField.UI
     /// </summary>
     public partial class App : Application
     {
+
     }
 }

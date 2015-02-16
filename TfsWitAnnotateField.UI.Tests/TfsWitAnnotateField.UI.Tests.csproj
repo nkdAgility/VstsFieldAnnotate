@@ -102,12 +102,6 @@
     <Compile Include="ViewModel\ViewModelLocator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TfsWitAnnotateField.UI\TfsWitAnnotateField.UI.csproj">
-      <Project>{3891ccbe-e6ad-4ed7-be9d-5bce3d287d6b}</Project>
-      <Name>TfsWitAnnotateField.UI</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>

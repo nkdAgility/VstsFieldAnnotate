@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TfsWitAnnotateField.UI.Infra;
 using TfsWitAnnotateField.UI.ViewModel;
 
 namespace TfsWitAnnotateField.UI
@@ -21,9 +22,14 @@ namespace TfsWitAnnotateField.UI
     /// </summary>
     public partial class MainWindow : Window
     {
+        AssemblyLoader assemblyLoader;
         public MainWindow()
         {
+            assemblyLoader =new AssemblyLoader();
+            assemblyLoader.BindAssemblyResolveEventHandler();
             InitializeComponent();
+        
+
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
