@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     mc:Ignorable="d" 
     x:Class="TfsWitAnnotateField.UI.MainWindow"
-        Title="Tfs Field Annotator from MrHinsh" Height="720" Width="720" Icon="Assets/logo.ico">
+        Title="Tfs Field Annotator from MrHinsh" Height="708.1" Width="658.199" MinWidth="700" Icon="Assets/logo.ico">
     <Window.Resources>
 
         <lc:VisibilityConvertor x:Key="VisibilityConverter" />
@@ -46,15 +46,21 @@
     </Window.DataContext>
     <Grid>
         <DockPanel>
-             <DockPanel.Background>
+            <DockPanel.Background>
                 <ImageBrush ImageSource="Assets/header-background.png"/>
             </DockPanel.Background>
             <DockPanel DockPanel.Dock="Top" Margin="5">
-                <Image VerticalAlignment="Top" Width="90" Source="Assets/metro-logo-128-link.png" />
+                <DockPanel.Background>
+                    <ImageBrush ImageSource="Assets/nkdalm-logo-background.png" Stretch="Fill" />
+                </DockPanel.Background>
                 <DockPanel Margin="5,0">
-                    <TextBlock DockPanel.Dock="Top" Text="naked ALM: Field Anotate" TextWrapping="Wrap" Foreground="White" FontSize="32" Margin="0" />
-                    <TextBlock  Foreground="White" TextWrapping="Wrap" Margin="0,5" >
+                    <Image DockPanel.Dock="Left" Source="Assets/nkdalm-logo-signate.png" Width="100" />
+                    <Image DockPanel.Dock="Right" Source="Assets/nkdalm-logo-eye.png" Width="150" />
+                    <StackPanel>
+                        <TextBlock DockPanel.Dock="Top" Text="naked ALM: Field Anotate" TextWrapping="Wrap" Foreground="White" FontSize="32" Margin="0" />
+                        <TextBlock  Foreground="White" TextWrapping="Wrap" Margin="0,5" >
                        Guidance for agile teams developing software with Team Foundation Server and Visual Studio. Provided to you from <Hyperlink NavigateUri="http://nakedalm.com/?utm_source=TfsServiceCredentials&amp;utm_medium=banner&amp;utm_campaign=TfsServiceCredentials" RequestNavigate="Hyperlink_RequestNavigate" Foreground="#FF0F6BB6">http://nakedalm.com</Hyperlink></TextBlock>
+                    </StackPanel>
                 </DockPanel>
             </DockPanel>
             <ScrollViewer>
@@ -72,10 +78,9 @@
                                 <Border DockPanel.Dock="Left" Background="#FF7D7D7E" Width="50" Height="50" Margin="10" VerticalAlignment="Top" >
                                     <TextBlock Text="1" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="22" />
                                 </Border>
-                                <Border DockPanel.Dock="Top" Height="50" Margin="10">
+                                <Border DockPanel.Dock="Top" Height="25" Margin="10">
                                     <StackPanel>
                                         <Label Content="Connect to a Team Project" FontWeight="Bold" />
-                                        <TextBlock Text="" />
                                     </StackPanel>
                                 </Border>
                                 <DockPanel>
