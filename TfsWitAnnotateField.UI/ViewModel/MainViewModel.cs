@@ -13,6 +13,8 @@ using System.Text;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using System.Diagnostics;
+using Microsoft.ApplicationInsights;
+using Microsoft.ApplicationInsights.DataContracts;
 
 namespace TfsWitAnnotateField.UI.ViewModel
 {
@@ -30,10 +32,10 @@ namespace TfsWitAnnotateField.UI.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-
-        private RelayCommand _ConnectCommand;
-        private RelayCommand _ClearErrorCommand;
-        private RelayCommand _ExportCommand;
+        private TelemetryClient _telemetryClient;
+        private TrackedRelayCommand _ConnectCommand;
+        private TrackedRelayCommand _ClearErrorCommand;
+        private TrackedRelayCommand _ExportCommand;
         private TfsTeamProjectCollection _SelectedTeamProjectCollection;
         private FieldDefinitionViewModel _SelectedFieldDefinition;
         private ObservableCollection<FieldDefinitionViewModel> _CheckedFieldDefinitions;
@@ -241,10 +243,11 @@ namespace TfsWitAnnotateField.UI.ViewModel
             ////{
             ////    // Code runs "for real"
             ////}
+            _telemetryClient = ((App)System.Windows.Application.Current).TemetryClient;
             _CollectionSelector = collectionSelector;
-            _ConnectCommand = new RelayCommand(OnConnectCommand);
-            _ClearErrorCommand = new RelayCommand(OnClearErrorCommand);
-            _ExportCommand = new RelayCommand(OnExportCommand);
+            _ConnectCommand = new TrackedRelayCommand(OnConnectCommand);
+            _ClearErrorCommand = new TrackedRelayCommand(OnClearErrorCommand);
+            _ExportCommand = new TrackedRelayCommand(OnExportCommand);
             Messenger.Default.Register<FieldDefinitionViewModel>(this, (action) => this.RaisePropertyChanged("FieldHistory"));
 
         }
@@ -278,7 +281,8 @@ namespace TfsWitAnnotateField.UI.ViewModel
 
         private void OnConnectCommand()
         {
-            _SelectedTeamProjectCollection = _CollectionSelector.SelectCollection();
+               _SelectedTeamProjectCollection = _CollectionSelector.SelectCollection();
+                _SelectedTeamProjectCollection.EnsureAuthenticated();
             if (_SelectedTeamProjectCollection != null)
             {
                 this.RaisePropertyChanged("IsConnected");
@@ -301,29 +305,25 @@ namespace TfsWitAnnotateField.UI.ViewModel
 
         private WorkItem GetWorkItem(int id)
         {
+            WorkItem result = null;
             if (IsConnected)
             {
                 WorkItemStore store = GetStore(_SelectedTeamProjectCollection);
                 try
                 {
-                    WorkItem result = store.GetWorkItem(id);
+                    result = store.GetWorkItem(id);
                     OnClearErrorCommand();
-                    return result;
-
-                }
-                catch (DeniedOrNotExistException)
-                {
+                } catch (DeniedOrNotExistException) {
                     ErrorMessage = "That Work Item Id either does not exit or you do not have permission to view it";
-                    return null;
+                    result= null;
                 }
             }
-            return null;
+            return result;
         }
 
         private List<string> GetWorkItemFieldHistory(int id)
         {
             List<string> history = new List<string>();
-
             if (_CheckedFieldDefinitions != null)
             {
                 foreach (var fieldDef in _CheckedFieldDefinitions)
@@ -331,7 +331,6 @@ namespace TfsWitAnnotateField.UI.ViewModel
                     fieldDef.LastValue = null;
                 }
             }
-
             if (IsConnected && IsWorkItemSelected && IsFieldDefinitionsChecked)
             {
                 try
@@ -373,9 +372,11 @@ namespace TfsWitAnnotateField.UI.ViewModel
                         }
                     }
                 }
-                catch (ValidationException e)
+                catch (ValidationException ex)
                 {
-                    history.Add(e.Message);
+                    ErrorMessage = ex.Message;
+                    history.Add(ex.Message);
+                    throw ex;
                 }
 
             }
