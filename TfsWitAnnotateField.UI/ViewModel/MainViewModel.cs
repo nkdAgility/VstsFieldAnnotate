@@ -281,8 +281,9 @@ namespace TfsWitAnnotateField.UI.ViewModel
 
         private void OnConnectCommand()
         {
-               _SelectedTeamProjectCollection = _CollectionSelector.SelectCollection();
-                _SelectedTeamProjectCollection.EnsureAuthenticated();
+            _SelectedTeamProjectCollection = _CollectionSelector.SelectCollection();
+            _SelectedTeamProjectCollection.EnsureAuthenticated();
+            _telemetryClient.Context.User.AccountId = _SelectedTeamProjectCollection.Uri.ToString();
             if (_SelectedTeamProjectCollection != null)
             {
                 this.RaisePropertyChanged("IsConnected");
@@ -343,11 +344,15 @@ namespace TfsWitAnnotateField.UI.ViewModel
                     var checkedFields = from field in _CheckedFieldDefinitions
                                         where field.IsChecked == true
                                         select field;
-
+                    //
+                    _telemetryClient.Context.Properties["WI Revisions"] = revisionCount.ToString();
+                    _telemetryClient.Context.Properties["Fields Checked"] = checkedFields.Count().ToString();
+                    _telemetryClient.Context.Properties["Fields Available"] = result.Fields.Count.ToString();
+                    //
                     foreach (Revision r in result.Revisions)
                     {
                         StringBuilder sBuilder = null;
-
+                        
 
                         foreach (var fieldDefinitionViewModel in checkedFields)
                         {

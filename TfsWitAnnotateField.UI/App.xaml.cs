@@ -31,9 +31,7 @@ namespace TfsWitAnnotateField.UI
 
 
             //TemetryClient.Context.Properties["CustomTrackingProperty"] = "OCT2014";
-
             telemetryClient.Context.User.Id = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-
             if (Debugger.IsAttached)
             {
                 TemetryClient.TrackTrace("DEBUG MODE");
