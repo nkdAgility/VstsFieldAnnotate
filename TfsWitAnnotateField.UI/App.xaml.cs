@@ -41,5 +41,17 @@ namespace TfsWitAnnotateField.UI
             //Application curApp = Application.Current;
             //curApp.Shutdown();
         }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            TemetryClient.TrackEvent("OnExit");
+            base.OnExit(e);
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            TemetryClient.TrackEvent("OnStartup");
+            base.OnStartup(e);
+        }
     }
 }
