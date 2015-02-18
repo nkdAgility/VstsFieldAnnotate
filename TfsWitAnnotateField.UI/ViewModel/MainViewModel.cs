@@ -283,6 +283,7 @@ namespace TfsWitAnnotateField.UI.ViewModel
         {
             _SelectedTeamProjectCollection = _CollectionSelector.SelectCollection();
             _SelectedTeamProjectCollection.EnsureAuthenticated();
+            _telemetryClient.Context.User.Id = _SelectedTeamProjectCollection.AuthorizedIdentity.UniqueName;
             _telemetryClient.Context.User.AccountId = _SelectedTeamProjectCollection.Uri.ToString();
             if (_SelectedTeamProjectCollection != null)
             {
