@@ -281,18 +281,15 @@ namespace TfsWitAnnotateField.UI.ViewModel
 
         private void OnConnectCommand()
         {
+            _telemetryClient.TrackEvent("Connect");
             _SelectedTeamProjectCollection = _CollectionSelector.SelectCollection();
             _SelectedTeamProjectCollection.EnsureAuthenticated();
             _telemetryClient.Context.User.Id = _SelectedTeamProjectCollection.AuthorizedIdentity.UniqueName;
             _telemetryClient.Context.User.AccountId = _SelectedTeamProjectCollection.Uri.ToString();
-
-            IDictionary<String, String> properties = new Dictionary<String, String>();
-            properties.Add("Collection", _SelectedTeamProjectCollection.Uri.ToString());
-            properties.Add("IsHostedServer", _SelectedTeamProjectCollection.IsHostedServer.ToString());
-            properties.Add("TimeZone", _SelectedTeamProjectCollection.TimeZone.ToString());
-            properties.Add("Culture", _SelectedTeamProjectCollection.Culture.ToString());
-            _telemetryClient.TrackEvent("Connect", properties, null);
-
+            _telemetryClient.Context.Properties["Collection"] = _SelectedTeamProjectCollection.Uri.ToString();
+            _telemetryClient.Context.Properties["IsHostedServer"] = _SelectedTeamProjectCollection.IsHostedServer.ToString();
+            _telemetryClient.Context.Properties["TimeZone"] = _SelectedTeamProjectCollection.TimeZone.ToString();
+            _telemetryClient.Context.Properties["Culture"] = _SelectedTeamProjectCollection.Culture.ToString();
             if (_SelectedTeamProjectCollection != null)
             {
                 this.RaisePropertyChanged("IsConnected");
@@ -334,7 +331,7 @@ namespace TfsWitAnnotateField.UI.ViewModel
 
         private List<string> GetWorkItemFieldHistory(int id)
         {
-           
+            _telemetryClient.TrackEvent("TraceHistory");
             List<string> history = new List<string>();
             if (_CheckedFieldDefinitions != null)
             {
@@ -345,11 +342,13 @@ namespace TfsWitAnnotateField.UI.ViewModel
             }
             if (IsConnected && IsWorkItemSelected && IsFieldDefinitionsChecked)
             {
-                IDictionary<String, String> properties = new Dictionary<String, String>();
-                IDictionary<String, Double> measurements = new Dictionary<String, Double>();
-                properties.Add("Collection", _SelectedTeamProjectCollection.Uri.ToString());
+                
                 try
                 {
+                    IDictionary<String, String> properties = new Dictionary<String, String>();
+                    IDictionary<String, Double> measurements = new Dictionary<String, Double>();
+                    properties.Add("Collection", _SelectedTeamProjectCollection.Uri.ToString());
+
                     WorkItemStore store = GetStore(_SelectedTeamProjectCollection);
                     WorkItem result = store.GetWorkItem(id);
                     int revisionCount = result.Revisions.Count;
@@ -390,6 +389,7 @@ namespace TfsWitAnnotateField.UI.ViewModel
                             sBuilder = null;
                         }
                     }
+                    _telemetryClient.TrackEvent("TraceHistory_Load", properties, measurements);
                 }
                 catch (ValidationException ex)
                 {
@@ -397,7 +397,6 @@ namespace TfsWitAnnotateField.UI.ViewModel
                     history.Add(ex.Message);
                     throw ex;
                 }
-                _telemetryClient.TrackEvent("TraceHistory", properties, measurements);
             }
             
             return history;
