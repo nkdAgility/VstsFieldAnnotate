@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     mc:Ignorable="d" 
     x:Class="TfsWitAnnotateField.UI.MainWindow"
-        Title="Tfs Field Annotator from MrHinsh" Height="708.1" Width="658.199" MinWidth="700" Icon="Assets/logo.ico">
+        Title="Field Annotate from naked ALM Consulting" Height="708.1" Width="658.199" MinWidth="700" Icon="Assets/logo.ico">
     <Window.Resources>
 
         <lc:VisibilityConvertor x:Key="VisibilityConverter" />
@@ -49,11 +49,11 @@
             <DockPanel.Background>
                 <ImageBrush ImageSource="Assets/header-background.png"/>
             </DockPanel.Background>
-            <DockPanel DockPanel.Dock="Top" Margin="5">
+            <DockPanel DockPanel.Dock="Top" Margin="0">
                 <DockPanel.Background>
                     <ImageBrush ImageSource="Assets/nkdalm-logo-background.png" Stretch="Fill" />
                 </DockPanel.Background>
-                <DockPanel Margin="5,0">
+                <DockPanel Margin="0">
                     <Image DockPanel.Dock="Left" Source="Assets/nkdalm-logo-signate.png" Width="100" />
                     <Image DockPanel.Dock="Right" Source="Assets/nkdalm-logo-eye.png" Width="150" />
                     <StackPanel>
