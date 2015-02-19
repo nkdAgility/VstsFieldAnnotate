@@ -55,19 +55,20 @@ namespace TfsWitAnnotateField.UI.Infra
         public Assembly LoadAssemlbyFromProductInstallationFolder(object sender, ResolveEventArgs args)
         {
             Assembly result = null;
-                if (args != null && !string.IsNullOrEmpty(args.Name))
+            if (args != null && !string.IsNullOrEmpty(args.Name))
+            {
+                var folderPath = (new FileInfo(this.ProductInstallationFolder)).DirectoryName;
+                var assemblyNameBits = args.Name.Split(new string[] { "," }, StringSplitOptions.None)[0];
+                var assembyName = string.Format("{0}.dll", assemblyNameBits);
+                var assemblyPath = Path.Combine(folderPath, assembyName);
+                if (!File.Exists(assemblyPath))
                 {
-                    var folderPath = (new FileInfo(this.ProductInstallationFolder)).DirectoryName;
-                    var assemblyName = args.Name.Split(new string[] { "," }, StringSplitOptions.None)[0];
-                    var assemblyExtension = "dll";
-                    var assemblyPath = Path.Combine(folderPath, string.Format("{0}.{1}", assemblyName, assemblyExtension));
-                    if (!File.Exists(assemblyPath))
-                    {
+                    //Load pre 2015 assemblies
                     return null;
-                    }
-
-                    result = Assembly.LoadFrom(assemblyPath);
                 }
+
+                result = Assembly.LoadFrom(assemblyPath);
+            }
             return result;
         }
     }

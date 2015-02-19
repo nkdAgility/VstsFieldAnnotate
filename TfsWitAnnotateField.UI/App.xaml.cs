@@ -28,6 +28,7 @@ namespace TfsWitAnnotateField.UI
             assemblyLoader = new AssemblyLoader();
             assemblyLoader.BindAssemblyResolveEventHandler();
             TemetryClient.Context.Properties["DEBUG"] = Debugger.IsAttached.ToString();
+            Trace.WriteLine("TfsWitAnnotateField");
             //TemetryClient.Context.Properties["CustomTrackingProperty"] = "OCT2014";
 
         }
