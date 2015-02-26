@@ -282,6 +282,7 @@ namespace TfsWitAnnotateField.UI.ViewModel
         private void OnConnectCommand()
         {
             _telemetryClient.TrackEvent("Connect");
+            
             _SelectedTeamProjectCollection = _CollectionSelector.SelectCollection();
             _SelectedTeamProjectCollection.EnsureAuthenticated();
             _telemetryClient.Context.User.Id = _SelectedTeamProjectCollection.AuthorizedIdentity.UniqueName;

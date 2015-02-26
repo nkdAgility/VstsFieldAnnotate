@@ -13,6 +13,7 @@
 */
 
 using GalaSoft.MvvmLight;
+using Microsoft.ApplicationInsights;
 using TfsWitAnnotateField.UI.Infra;
 
 namespace TfsWitAnnotateField.UI.ViewModel
@@ -24,6 +25,7 @@ namespace TfsWitAnnotateField.UI.ViewModel
     public class ViewModelLocator
     {
         private static MainViewModel _main;
+        private TelemetryClient _telemetryClient;
 
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
@@ -38,7 +40,7 @@ namespace TfsWitAnnotateField.UI.ViewModel
             ////{
             ////    // Create run time services and view models
             ////}
-
+            _telemetryClient = ((App)System.Windows.Application.Current).TemetryClient;
             _main = new MainViewModel(new CollectionSelector());
         }
 
@@ -52,6 +54,7 @@ namespace TfsWitAnnotateField.UI.ViewModel
         {
             get
             {
+                _telemetryClient.TrackPageView("MainViewModel");
                 return _main;
             }
         }
