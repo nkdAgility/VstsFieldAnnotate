@@ -25,8 +25,9 @@ namespace TfsWitAnnotateField.UI
 
         public App() : base()
         {
+            //((InProcessTelemetryChannel)TelemetryConfiguration.Active.TelemetryChannel).DeveloperMode = true;
+            ((InProcessTelemetryChannel)TelemetryConfiguration.Active.TelemetryChannel).DataUploadIntervalInSeconds = 5;
             telemetryClient = new TelemetryClient();
-            ((InProcessTelemetryChannel)TelemetryConfiguration.Active.TelemetryChannel).DeveloperMode = true;
             this.Dispatcher.UnhandledException += OnDispatcherUnhandledException;
             assemblyLoader = new AssemblyLoader();
             assemblyLoader.BindAssemblyResolveEventHandler();
