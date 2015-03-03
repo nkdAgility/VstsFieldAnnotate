@@ -25,15 +25,13 @@ namespace TfsWitAnnotateField.UI
 
         public App() : base()
         {
-            //((InProcessTelemetryChannel)TelemetryConfiguration.Active.TelemetryChannel).DeveloperMode = true;
+            ((InProcessTelemetryChannel)TelemetryConfiguration.Active.TelemetryChannel).DeveloperMode = true;
             ((InProcessTelemetryChannel)TelemetryConfiguration.Active.TelemetryChannel).DataUploadIntervalInSeconds = 5;
             telemetryClient = new TelemetryClient();
             this.Dispatcher.UnhandledException += OnDispatcherUnhandledException;
             assemblyLoader = new AssemblyLoader();
             assemblyLoader.BindAssemblyResolveEventHandler();
             TemetryClient.Context.Properties["DEBUG"] = Debugger.IsAttached.ToString();
-            Trace.WriteLine("TfsWitAnnotateField");
-            //TemetryClient.Context.Properties["CustomTrackingProperty"] = "OCT2014";
 
         }
 
