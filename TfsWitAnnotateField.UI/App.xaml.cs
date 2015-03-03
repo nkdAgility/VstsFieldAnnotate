@@ -1,4 +1,6 @@
 ﻿using Microsoft.ApplicationInsights;
+using Microsoft.ApplicationInsights.Channel;
+using Microsoft.ApplicationInsights.Extensibility;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -24,6 +26,7 @@ namespace TfsWitAnnotateField.UI
         public App() : base()
         {
             telemetryClient = new TelemetryClient();
+            ((InProcessTelemetryChannel)TelemetryConfiguration.Active.TelemetryChannel).DeveloperMode = true;
             this.Dispatcher.UnhandledException += OnDispatcherUnhandledException;
             assemblyLoader = new AssemblyLoader();
             assemblyLoader.BindAssemblyResolveEventHandler();
